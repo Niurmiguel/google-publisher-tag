@@ -1,7 +1,12 @@
 {
   "name": "root",
   "private": true,
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
-    "lerna": "^5.1.8"
+    "lerna": "^5.1.8",
+    "nx": "^14.4.3"
   }
 }
