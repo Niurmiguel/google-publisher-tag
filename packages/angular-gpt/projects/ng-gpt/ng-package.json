@@ -3,5 +3,6 @@
   "dest": "../../dist/ng-gpt",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["@types/googletag"]
 }
