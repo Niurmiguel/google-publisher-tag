@@ -47,6 +47,8 @@ export class NgGptServiceOptions {
    * Configuration object for privacy settings.
    */
   public privacySettingsConfig?: googletag.PrivacySettingsConfig;
+
+  public disableInitialLoad?: boolean;
 }
 
 export const GPT_OPTIONS = new InjectionToken<NgGptServiceOptions>(

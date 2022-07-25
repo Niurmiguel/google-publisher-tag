@@ -74,7 +74,10 @@ export class NgGptService {
         forceSafeFrame,
         safeFrameConfig,
         privacySettingsConfig,
+        disableInitialLoad,
       } = this.options;
+
+      if (disableInitialLoad) pubads.disableInitialLoad();
 
       // Collapse Empty Divs
       if (collapseEmptyDivs) pubads.collapseEmptyDivs();
@@ -149,6 +152,8 @@ export class NgGptService {
         slot.setCategoryExclusion(ad.categoryExclusion);
       }
     }
+
+    slot.set('adsense_background_color', '#000000');
 
     if (typeof ad.forceSafeFrame === 'boolean') {
       slot.setForceSafeFrame(ad.forceSafeFrame);
