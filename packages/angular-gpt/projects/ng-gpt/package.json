@@ -1,6 +1,29 @@
 {
-  "name": "ng-gpt",
-  "version": "0.0.1",
+  "name": "@niur/ng-gpt",
+  "version": "1.0.0",
+  "description": "A Angular implementation of the google GPT API.",
+  "author": "Niurmiguel Gonzalez",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "doubleclick",
+    "google",
+    "google dfp",
+    "google doubleclick for publishers",
+    "advertising",
+    "ads",
+    "dfp",
+    "gpt",
+    "gam"
+  ],
+  "homepage": "https://github.com/Niurmiguel/google-publisher-tag/tree/master/packages/angular-gpt/projects/ng-gpt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Niurmiguel/google-publisher-tag"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
