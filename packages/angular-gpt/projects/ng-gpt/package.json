@@ -1,9 +1,10 @@
 {
   "name": "@niur/ng-gpt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Angular implementation of the google GPT API.",
   "author": "Niurmiguel Gonzalez",
   "license": "MIT",
+  "types": "dist/ng-gpt/index.d.ts",
   "keywords": [
     "angular",
     "doubleclick",

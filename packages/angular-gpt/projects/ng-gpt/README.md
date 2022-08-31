@@ -14,7 +14,7 @@ The <a href="https://developers.google.com/publisher-tag/guides/get-started" tar
 #### Installation
 
 ```bash
-$ npm i --save @niur/ng-gpt
+$ npm i --save @niur/ng-gpt @types/googletag
 ```
 
 #### Overview
@@ -25,7 +25,7 @@ Import Angular GPT and pass props to the component.
 ```typescript
 //  app.module.ts
 
-import { NgGptModule } from 'ng-gpt';
+import { NgGptModule } from '@niur/ng-gpt';
 ...
 @NgModule({
     declarations: [AppComponent],
@@ -121,6 +121,61 @@ import { NgGptModule } from 'ng-gpt';
     <td>This event is fired whenever the on-screen percentage of an ad slot's area changes. The event is throttled and will not fire more often than once every 200ms.</td>
   </tr>
 </table>
+
+## Example
+
+```html
+<!-- Fixed size ad slot -->
+<!-- This ad slot will display an ad sized 300x250. -->
+<div class="ad-container">
+    <gpt-ad adUnitPath="/6355419/Travel/Europe/France/Paris" [size]="[300, 250]"></gpt-ad>
+</div>
+
+<!-- Multi-size ad slot -->
+<!-- This ad slot will display an ad with any of the following dimensions: 300x250, 728x90, 750x200. -->
+<div class="ad-container">
+    <gpt-ad adUnitPath="/6355419/Travel/Europe" [size]="[
+    [300, 250],
+    [728, 90],
+    [750, 200],
+  ]"></gpt-ad>
+</div>
+
+
+<!-- Fluid ad slot -->
+<!-- This ad slot will resize its height to fit the creative content being displayed. For this example, the slot is
+    limited to 50% of the width of its parent container. -->
+<div class="ad-container">
+    <gpt-ad adUnitPath="/6355419/Travel" [size]="['fluid']"></gpt-ad>
+</div>
+
+<!-- Responsive ad slot -->
+<!-- This ad slot will display different sized ads depending on the size of the browser viewport at page load time: -->
+
+<!-- When viewport= 1024x768, ads sized 750x200 or 728x90 may be displayed. -->
+<!-- When 1024x768 viewport= 640x480, ads sized 300x250 may be displayed. -->
+<!-- When viewport 640x480, no ads may be displayed. -->
+<div class="ad-container">
+    <gpt-ad adUnitPath="/6355419/Travel/Europe" [size]="[
+    [300, 250],
+    [728, 90],
+    [750, 200],
+  ]" [sizeMapping]="[
+    [
+      [1024, 768],
+      [
+        [750, 200],
+        [728, 90],
+      ],
+    ],
+    [
+      [640, 480],
+      [300, 250],
+    ],
+    [[0, 0], []],
+  ]"></gpt-ad>
+</div>
+```
 
 ## Stay in touch
 
