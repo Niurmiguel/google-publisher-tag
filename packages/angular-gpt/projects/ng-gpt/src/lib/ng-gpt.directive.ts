@@ -1,13 +1,16 @@
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { Subject, timer } from 'rxjs';
+import { Subject, Subscription, timer } from 'rxjs';
 import {
+  AfterViewInit,
   Directive,
+  DoCheck,
   ElementRef,
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -21,10 +24,14 @@ import { DELAY_TIME } from './constants';
 @Directive({
   selector: 'gpt-ad',
 })
-export class NgGptDirective implements OnInit {
+export class NgGptDirective
+  implements OnInit, DoCheck, OnDestroy, AfterViewInit
+{
   private $update = new Subject<void>();
   private $destroy = new Subject<void>();
   private slot?: googletag.Slot;
+
+  private onSameNavigation: Subscription;
 
   @Input() adUnitPath: string = '';
   @Input() id?: string = '';
@@ -60,10 +67,37 @@ export class NgGptDirective implements OnInit {
       this.init();
     }
   }
+  ngAfterViewInit(): void {
+    if (this.elementRef.nativeElement && this.elementRef.nativeElement.id) {
+      this.destroy();
+      this.create();
+    }
+  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId) && !this.id) {
       this.idGenerator.generate(this.elementRef.nativeElement);
+    }
+  }
+
+  ngDoCheck(): void {
+    if (
+      this.elementRef.nativeElement &&
+      this.elementRef.nativeElement.id &&
+      this.id !== this.elementRef.nativeElement.id
+    ) {
+      this.id = this.elementRef.nativeElement.id;
+      this.destroy();
+      this.create();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.slot) {
+      googletag.destroySlots([this.slot]);
+    }
+    if (this.onSameNavigation) {
+      this.onSameNavigation.unsubscribe();
     }
   }
 
@@ -106,8 +140,8 @@ export class NgGptDirective implements OnInit {
         this.gptService.defineTask(() => this.display());
       });
 
-    this.router &&
-      this.router.events
+    if (this.router) {
+      this.onSameNavigation = this.router.events
         .pipe(
           filter((event) => event instanceof NavigationEnd),
           takeUntil(this.$destroy)
@@ -115,5 +149,14 @@ export class NgGptDirective implements OnInit {
         .subscribe(() => {
           this.$update.next();
         });
+    }
+  }
+
+  create() {
+    if (this.adUnitPath) {
+      this.$update.next();
+    } else {
+      this.destroy();
+    }
   }
 }

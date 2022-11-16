@@ -1,6 +1,6 @@
 {
   "name": "@niur/ng-gpt",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A Angular implementation of the google GPT API.",
   "author": "Niurmiguel Gonzalez",
   "license": "MIT",

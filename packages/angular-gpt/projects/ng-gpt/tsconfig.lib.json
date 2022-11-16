@@ -5,6 +5,7 @@
     "outDir": "../../out-tsc/lib",
     "declaration": true,
     "declarationMap": true,
+    "strictPropertyInitialization": false,
     "inlineSources": true,
     "types": ["googletag"]
   },

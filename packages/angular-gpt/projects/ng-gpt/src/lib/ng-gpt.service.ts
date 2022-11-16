@@ -69,6 +69,7 @@ export class NgGptService {
         centering,
         collapseEmptyDivs,
         enableLazyLoad,
+        enableSingleRequest,
         ppid,
         targeting,
         forceSafeFrame,
@@ -109,6 +110,10 @@ export class NgGptService {
       // Enable Lazy Load
       if (enableLazyLoad && Object.keys(enableLazyLoad).length) {
         pubads.enableLazyLoad(enableLazyLoad);
+      }
+
+      if (enableSingleRequest) {
+        pubads.enableSingleRequest();
       }
     });
   }

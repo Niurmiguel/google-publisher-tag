@@ -79,6 +79,10 @@ import { NgGptModule } from '@niur/ng-gpt';
     <td><code>privacySettingsConfig</code></td>
     <td>Configuration object for privacy settings.</td>
   </tr>
+  <tr>
+    <td><code>enableSingleRequest</code></td>
+    <td>Enables single request mode for fetching multiple ads at the same time.</td>
+  </tr>
 </table>
 
 ### Events

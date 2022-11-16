@@ -49,6 +49,13 @@ export class NgGptServiceOptions {
   public privacySettingsConfig?: googletag.PrivacySettingsConfig;
 
   public disableInitialLoad?: boolean;
+
+  /**
+   * Enables single request mode for fetching multiple ads at the same time.
+   * This requires all Publisher Ads slots to be defined and added to the PubAdsService prior to enabling the service.
+   * Single request mode must be set before the service is enabled.
+   */
+  public enableSingleRequest?: boolean;
 }
 
 export const GPT_OPTIONS = new InjectionToken<NgGptServiceOptions>(
